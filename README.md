@@ -34,46 +34,46 @@ This repository documents my journey learning Node.js fundamentals. Here's a sum
 - Enabled by setting `"type": "module"` in `package.json`
 - Benefits: Better static analysis, tree-shaking, and alignment with modern JavaScript standards
 
-### 5. **Basics of REPL (Read-Eval-Print Loop)**
+### 6. **Basics of REPL (Read-Eval-Print Loop)**
 
 - REPL is an interactive command-line interface for running JavaScript code in real-time.
 - Access it by typing `node` in the terminal without specifying a file.
 - It reads your input, evaluates it, prints the result, and loops back for more input.
 - Useful for quick testing and experimentation, but code entered here is temporary and not saved to files.
 
-### 6. **Entry Point Code Execution in Terminal**
+### 7. **Entry Point Code Execution in Terminal**
 
 - The entry point is the main file where your application starts (e.g., `app.js`).
 - Execute it by running `node app.js` in the terminal, which processes the code from top to bottom.
 - Node.js runs synchronously by default, but can handle asynchronous operations for non-blocking I/O.
 
-### 7. **Why Node.js is Called a Runtime Environment**
+### 8. **Why Node.js is Called a Runtime Environment**
 
 - Node.js provides a runtime environment that allows JavaScript to run outside web browsers, on servers or desktops.
 - It includes the V8 JavaScript engine plus APIs for interacting with the operating system (file system, network, etc.), making JS suitable for backend development.
 
-### 8. **Why We Write Code in Files Rather Than in Terminal**
+### 9. **Why We Write Code in Files Rather Than in Terminal**
 
 - Writing code in files (like `.js` files) allows it to be saved, version-controlled, and reused across sessions.
 - Terminal REPL is ideal for quick tests or one-off commands, but files are necessary for building persistent, shareable applications.
 
-### 9. **What is 'this' and What Does It Point To**
+### 10. **What is 'this' and What Does It Point To**
 
 - `this` is a keyword that refers to the context (object) in which a function is executed.
 - In the global scope, `this` points to the global object (in Node.js, it's the module's `exports`).
 - In object methods, `this` points to the object owning the method; in constructors, to the new instance.
 
-### 10. **What is the V8 Engine and Why We Need It**
+### 11. **What is the V8 Engine and Why We Need It**
 
 - V8 is Google's open-source JavaScript engine that compiles JavaScript code into efficient machine code for fast execution.
 - Node.js uses V8 to run JavaScript on the server-side, enabling high-performance backend applications without needing a browser.
 
-### 11. **What is a Server**
+### 12. **What is a Server**
 
 - A server is a computer program or hardware that provides services to other computers (clients) over a network.
 - In Node.js, you can build servers using built-in modules like `http` to handle web requests, serve files, or create APIs.
 
-### 12. **Timeline of Node.js**
+### 13. **Timeline of Node.js**
 
 - **2009**: Created by Ryan Dahl as an experiment to run JavaScript outside browsers.
 - **2011**: First stable release (v0.10.x).
@@ -88,7 +88,7 @@ This repository documents my journey learning Node.js fundamentals. Here's a sum
 - **2023**: v20.0 LTS.
 - Ongoing: Regular updates with new features, security fixes, and performance improvements.
 
-### 13. **Why Should I Still Learn Node.js**
+### 14. **Why Should I Still Learn Node.js**
 
 - **Versatility**: Enables full-stack development with a single language (JavaScript) for both frontend and backend.
 - **Performance**: Non-blocking I/O and V8 engine make it fast for scalable applications.
@@ -96,3 +96,10 @@ This repository documents my journey learning Node.js fundamentals. Here's a sum
 - **Popularity**: Used by companies like Netflix, LinkedIn, and Uber; strong job market.
 - **Modern Features**: Supports async/await, ES6+, and is evolving with new runtime capabilities.
 - **Community**: Large, active community for support, tutorials, and tools.
+
+### 15. **Creating Index Files for Module Aggregation**
+
+- **Purpose**: Organize related modules into folders and use an `index.js` file to combine and re-export them as a single module for easier importing.
+- **How It Works**: In a folder (e.g., `calculate/`), create individual modules (e.g., `sum.js`, `mul.js`, `sub.js`) that export their functions. Then, in `index.js`, import from these modules and export them together (e.g., `module.exports = { add, mul, sub }`).
+- **Usage**: Import the grouped exports in another file using `const { add, mul, sub } = require("./calculate")`, allowing access to multiple utilities from one import.
+- **Benefits**: Simplifies imports, improves code organization, and makes it easier to manage related functionalities as a cohesive unit.
