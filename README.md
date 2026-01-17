@@ -28,7 +28,11 @@ This repository documents my journey learning Node.js fundamentals. Here's a sum
 - Executing scripts with `node app.js`
 - Understanding the terminal output and exit codes
 
-This project serves as a foundation for building more complex Node.js applications, including servers, APIs, and full-stack projects.
+### 5. **Switching to ES Modules**
+
+- Transitioned from CommonJS (`require`/`module.exports`) to modern ES modules (`import`/`export`)
+- Enabled by setting `"type": "module"` in `package.json`
+- Benefits: Better static analysis, tree-shaking, and alignment with modern JavaScript standards
 
 ### 5. **Basics of REPL (Read-Eval-Print Loop)**
 
