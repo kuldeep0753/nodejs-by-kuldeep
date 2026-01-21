@@ -103,3 +103,73 @@ This repository documents my journey learning Node.js fundamentals. Here's a sum
 - **How It Works**: In a folder (e.g., `calculate/`), create individual modules (e.g., `sum.js`, `mul.js`, `sub.js`) that export their functions. Then, in `index.js`, import from these modules and export them together (e.g., `module.exports = { add, mul, sub }`).
 - **Usage**: Import the grouped exports in another file using `const { add, mul, sub } = require("./calculate")`, allowing access to multiple utilities from one import.
 - **Benefits**: Simplifies imports, improves code organization, and makes it easier to manage related functionalities as a cohesive unit.
+
+### 16. **Node.js Event Loop - Priority Order**
+
+The Event Loop determines the order in which callbacks are executed. Understanding this priority hierarchy is crucial for writing efficient asynchronous code.
+
+#### **🥇 Highest Priority: Microtasks**
+
+- **`process.nextTick()`**: Executes at the end of the current phase, before any I/O events. Has the absolute highest priority.
+  ```javascript
+  process.nextTick(() => {
+    console.log('Executes first among async operations');
+  });
+  ```
+
+- **`Promise.then()` / `.catch()` / `.finally()`**: Executes after `process.nextTick()` but before timers. Includes `async/await`.
+  ```javascript
+  Promise.resolve().then(() => {
+    console.log('Executes after nextTick');
+  });
+  ```
+
+#### **🥈 Medium Priority: Macrotasks (I/O & API Requests)**
+
+- **HTTP Requests**: Network operations via `http.get()`, `fetch()`, etc.
+- **Database Calls**: Operations like `User.findById()`, database queries.
+- **File System**: `fs.readFile()`, `fs.readdir()`, and other file operations.
+
+These operations have actual I/O delays but execute before timers.
+
+#### **🥉 Lower Priority: Timers**
+
+- **`setTimeout()` / `setInterval()`**: Executes after all microtasks complete. Even `setTimeout(..., 0)` waits for Promises.
+  ```javascript
+  setTimeout(() => {
+    console.log('Executes last');
+  }, 0);
+  ```
+
+#### **Key Example**
+
+```javascript
+console.log('1. Sync code');
+
+setTimeout(() => {
+  console.log('2. setTimeout');
+}, 0);
+
+Promise.resolve().then(() => {
+  console.log('3. Promise');
+});
+
+process.nextTick(() => {
+  console.log('4. nextTick');
+});
+
+// Output:
+// 1. Sync code
+// 4. nextTick
+// 3. Promise
+// 2. setTimeout
+```
+
+#### **Complete Priority Hierarchy**
+
+1. **Synchronous code** (highest)
+2. **Microtasks**: `process.nextTick()` → `Promise.then()`
+3. **Macrotasks**: I/O operations → `setTimeout/setInterval`
+4. **Repeat microtasks** if any are queued after each macrotask
+
+This ensures predictable async behavior and prevents blocking operations from starving the event loop.
