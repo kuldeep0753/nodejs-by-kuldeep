@@ -2,8 +2,7 @@ const fs = require('fs');
 const https =require('https');
 console.log("Hello from async.js");
 
-
-fs.readFileSync('./Water Scarcity.pdf','utf-8'); //blocking code, takes more time to execute
+fs.readFileSync("./es6_tutorial.pdf",'utf-8'); //blocking code, takes more time to execute , here its take time because of large file size
 console.log("File read synchronously");
 
 https.get("https://dummyjson.com/products",(res)=>{ //take less time than fs to execute
